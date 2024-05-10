@@ -11,6 +11,14 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  String email = '', password = '', name = '';
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,70 +53,94 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
             ),
-           const Padding(
-              padding:  EdgeInsets.only(left: 20,top: 20),
-              child:  Image(image: AssetImage('asset/Your chatapp Here ,.png')),
-            ),
             const Padding(
-              padding: EdgeInsets.only(bottom: 50),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Name',
-                        hintStyle:
-                            TextStyle(color: Color(0xFF587091), fontSize: 20),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle:
-                            TextStyle(color: Color(0xFF587091), fontSize: 20),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
+              padding: EdgeInsets.only(left: 20, top: 20),
+              child: Image(image: AssetImage('asset/Your chatapp Here ,.png')),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Form(
+                key: formkey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter your name';
+                          }
+                          return null;
+                        },
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          hintText: 'Name',
+                          hintStyle:
+                              TextStyle(color: Color(0xFF587091), fontSize: 20),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle:
-                            TextStyle(color: Color(0xFF587091), fontSize: 20),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter your email';
+                          }
+                          return null;
+                        },
+                        controller: mailController,
+                        decoration: const InputDecoration(
+                          hintText: 'Email',
+                          hintStyle:
+                              TextStyle(color: Color(0xFF587091), fontSize: 20),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter your password';
+                          }
+                          return null;
+                        },
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                          hintText: 'Password',
+                          hintStyle:
+                              TextStyle(color: Color(0xFF587091), fontSize: 20),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -155,8 +187,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                             ),
-                            child: const Image(image: AssetImage('asset/icon-removebg-preview.png'))),
-                       const SizedBox(
+                            child: const Image(
+                                image: AssetImage(
+                                    'asset/icon-removebg-preview.png'))),
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -166,19 +200,30 @@ class _SignupScreenState extends State<SignupScreen> {
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                             ),
-                            child: const Icon(FontAwesomeIcons.apple,size: 45,)),
+                            child: const Icon(
+                              FontAwesomeIcons.apple,
+                              size: 45,
+                            )),
                       ],
                     ),
-                    const SizedBox(height: 30,),
-                const Padding(
-                   padding:  EdgeInsets.only(left: 50),
-                   child:  Row(
-                       children: [
-                         Text('Already have an account? ',style: TextStyle(color: Colors.grey,fontSize: 20),),
-                         Text(' LoginIn',style: TextStyle(color: Colors.white,fontSize: 20),)
-                       ],
-                     ),
-                 )
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Already have an account? ',
+                            style: TextStyle(color: Colors.grey, fontSize: 20),
+                          ),
+                          Text(
+                            ' Login',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
